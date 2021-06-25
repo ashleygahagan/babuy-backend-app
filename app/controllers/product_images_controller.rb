@@ -4,6 +4,11 @@ class ProductImagesController < ApplicationController
       product_id: params[:product_id],
       url: params[:url]
     )
+    if product_image.save
+      render json: product_image
+    else
+      render json: {errors: product_image.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy

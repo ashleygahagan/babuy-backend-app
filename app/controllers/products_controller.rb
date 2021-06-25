@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user
+  
   def index
     products = Product.all
-    render json: products.as_json
+    render json: products
   end
 
   def create
@@ -16,7 +18,7 @@ class ProductsController < ApplicationController
       sold: params[:sold]
     )
     if product.save
-      render json: product.as_json
+      render json: product
     else
       render json: {errors: product.errors.full_messages}, status: :unprocessable_entity
     end
@@ -24,29 +26,34 @@ class ProductsController < ApplicationController
 
   def show
     product = Product.find_by(id: params[:id])
-    render json: product.as_json
+    render json: product
   end
 
   def update
     product = Product.find_by(id: params[:id])
-    product.category_id = params[:category_id] || product.category_id
-    product.title = params[:title] || product.title
-    product.description = params[:description] || product.description
-    product.condition = params[:condition] || product.condition
-    product.price = params[:price] || product.price
-    product.trade = params[:trade] || product.trade
-    product.sold = params[:sold] || product.sold
-    if product.save
-      render json: product.as_json
-    else
-      render json: { errors: products.errors.full_messages }, status: :unprocessable_entity
+    if current_user.id == product.user_id
+      product.category_id = params[:category_id] || product.category_id
+      product.title = params[:title] || product.title
+      product.description = params[:description] || product.description
+      product.condition = params[:condition] || product.condition
+      product.price = params[:price] || product.price
+      product.trade = params[:trade] || product.trade
+      product.sold = params[:sold] || product.sold
+      if product.save
+        render json: product
+      else
+        render json: { errors: products.errors.full_messages }, status: :unprocessable_entity
+      end
     end
   end
 
   def destroy
     product = Product.find_by(id: params[:id])
-    product.destroy
-    render json: {message: "Product successfully deleted."}
+    if current_user.id == product.user_id
+      product.destroy
+      # product.all_product_images.destroy_all
+      render json: {message: "Product successfully deleted."}
+    end
   end
 
 end
