@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, except: [:create]
+
   def create
     user = User.new(
       first_name: params[:first_name],
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by(id: params[:id])
-    render json: user
+    render json: user, include: ["products.product_images", "products.category"]
   end
 
   def update
@@ -41,8 +43,6 @@ class UsersController < ApplicationController
   def destroy
     user = current_user
     user.destroy
-    # user.all_products.destroy_all
-    # user.all_product_images.destroy_all
     render json: {message: "Account has been deleted."}
   end
 
