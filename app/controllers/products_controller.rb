@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
       condition: params[:condition],
       price: params[:price],
       trade: params[:trade],
-      sold: params[:sold]
+      sold: params[:sold],
     )
     if product.save
       render json: product
@@ -37,8 +37,16 @@ class ProductsController < ApplicationController
       product.description = params[:description] || product.description
       product.condition = params[:condition] || product.condition
       product.price = params[:price] || product.price
-      product.trade = params[:trade] || product.trade
-      product.sold = params[:sold] || product.sold
+      if params[:trade] == true
+        product.trade = true
+      elsif params[:trade] == false
+        product.trade = false
+      end
+      if params[:sold] == true
+        product.sold = true
+      elsif params[:sold] == false
+        product.sold = false
+      end
       if product.save
         render json: product
       else

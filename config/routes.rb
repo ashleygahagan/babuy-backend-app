@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   
   post "/users" => "users#create"
   get "/users/:id" => "users#show"
-  patch "/users/me" => "users#update"
-  delete "/users/me" => "users#destroy"
+  patch "/users/:id" => "users#update"
+  delete "/users/:id" => "users#destroy"
 
 
   get "/products" => "products#index"

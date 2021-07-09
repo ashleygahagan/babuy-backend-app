@@ -55,3 +55,12 @@
 # ProductImage.create(product_id: 2, url: "https://www.novanatural.com/img/wooden-train_01.jpg?resizeid=2&resizeh=560&resizew=560")
 
 # ProductImage.create(product_id: 2, url: "https://i.pinimg.com/originals/64/86/6b/64866b84764e85b6cd191dcfb57638d6.jpg")
+
+# ProductImage.create(product_id: 7, url: "https://assets.weimgs.com/weimgs/rk/images/wcm/products/202115/0691/img34c.jpg")
+
+# ProductImage.create(product_id: 7, url: "https://assets.weimgs.com/weimgs/ab/images/wcm/products/202120/0023/nash-convertible-crib-natural-z.jpg")
+
+# ProductImage.create(product_id: 6, url: "https://www.gapfactory.com/webcontent/0020/151/722/cn20151722.jpg")
+
+# ProductImage.create(product_id: 1, url: "https://cdn.shopify.com/s/files/1/1267/0473/products/icandy-peach-stroller-phantom-dove-grey-2_2000x.jpg?v=1543946987")
+
